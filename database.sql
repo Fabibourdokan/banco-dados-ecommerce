@@ -1,0 +1,32 @@
+CREATE DATABASE estudos;
+USE estudos;
+
+CREATE TABLE cliente (
+  id INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL,
+  telefone VARCHAR(20),
+  data_nasc DATE,
+  ativo BOOLEAN DEFAULT TRUE,
+  criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE produtos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  preco DECIMAL(10,2) NOT NULL,
+  estoque INT DEFAULT 0,
+  ativo BOOLEAN DEFAULT TRUE,
+  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE pedidos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  cliente_id INT,
+  produto_id INT,
+  quantidade INT,
+  data_pedido DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (cliente_id) REFERENCES cliente(id),
+  FOREIGN KEY (produto_id) REFERENCES produtos(id)
+);
